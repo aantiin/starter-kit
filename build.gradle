@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'kit-app'
+    version = '0.0.1-DEVELOPMENT'
+}
+
+//bootRun {
+//    jvmArgs = ["-Dspring.profiles.active=dev"]
+//}
+
+
+sourceCompatibility = 1.8
+
+repositories { mavenCentral() }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    compile("org.springframework.boot:spring-boot-starter-websocket"){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    compile('org.springframework.boot:spring-boot-starter-jetty')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework:spring-aspects')
+
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
